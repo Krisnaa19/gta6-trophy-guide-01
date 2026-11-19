@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="night">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Platinum — GTA VI Trophy Guide &amp; Tracker</title>
+<meta name="description" content="Offline guide and tracker for all 55 Grand Theft Auto VI trophies on PlayStation 5: official list, saved checklist, roadmap to the platinum, missables flagged, and a cited guide for every trophy.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark" aria-hidden="true">LP</div>
+    <div>
+      <h1>Leonida Platinum</h1>
+      <p class="tagline">GTA VI trophy guide &amp; tracker — all 55 trophies, offline</p>
+    </div>
+  </div>
+  <div class="progress-wrap" id="progress-wrap" title="Your earned trophies">
+    <div class="progress-big"><span id="earned-count">0</span><span class="progress-of">/ 55</span></div>
+    <div class="progress-bar"><div id="progress-fill"></div></div>
+    <p class="progress-note" id="progress-note">0% to the platinum</p>
+  </div>
+  <div class="top-actions">
+    <button id="theme-toggle" type="button" title="Switch paper / night theme">Paper theme</button>
+    <button id="export-btn" type="button" title="Download your progress as a JSON file">Export</button>
+    <button id="import-btn" type="button" title="Import a progress file you exported earlier">Import</button>
+    <input type="file" id="import-file" accept="application/json,.json" hidden>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <button class="tab active" data-view="tracker" type="button">Tracker</button>
+  <button class="tab" data-view="roadmap" type="button">Roadmap</button>
+  <button class="tab" data-view="missables" type="button">Missables <span class="tab-badge" id="missable-count">1</span></button>
+  <button class="tab" data-view="planner" type="button">Next up</button>
+  <button class="tab" data-view="about" type="button">About &amp; sources</button>
+</nav>
+
+<section class="toolbar" id="tracker-toolbar">
+  <input id="search" type="search" placeholder="Search trophies by name or description…" aria-label="Search trophies">
+  <div class="chip-row" id="kind-chips" role="group" aria-label="Filter by kind">
+    <button class="chip active" data-kind="all" type="button">All 55</button>
+    <button class="chip" data-kind="story" type="button">Story</button>
+    <button class="chip" data-kind="missable" type="button">Missable</button>
+    <button class="chip" data-kind="collectibles" type="button">Collectibles</button>
+    <button class="chip" data-kind="activities" type="button">Activities</button>
+    <button class="chip" data-kind="platinum" type="button">Platinum</button>
+  </div>
+  <select id="grade-filter" aria-label="Filter by grade">
+    <option value="all">Every grade</option>
+    <option value="platinum">Platinum</option>
+    <option value="gold">Gold</option>
+    <option value="silver">Silver</option>
+    <option value="bronze">Bronze</option>
+  </select>
+  <select id="earned-filter" aria-label="Filter by earned state">
+    <option value="all">Earned + unearned</option>
+    <option value="earned">Earned only</option>
+    <option value="unearned">Unearned only</option>
+  </select>
+  <label class="spoiler-toggle" title="Hide the names and descriptions of story trophies until you earn them">
+    <input type="checkbox" id="spoiler-toggle" checked>
+    <span>Hide story spoilers</span>
+  </label>
+</section>
+
+<main>
+  <section id="view-tracker" class="view active">
+    <div class="tracker-grid">
+      <div class="list-col">
+        <p class="list-meta"><span id="shown-count">55</span> trophies shown · <span id="earned-shown">0</span> earned here · click a row for its guide</p>
+        <ul id="trophy-list" class="trophy-list"></ul>
+      </div>
+      <aside class="detail-col" id="detail-pane" aria-live="polite">
+        <p class="detail-empty">Select a trophy to read its guide, its sources, and your notes.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="view-roadmap" class="view">
+    <h2>The road to the platinum</h2>
+    <p class="view-intro">Seven stages, in order, built from the official trophy descriptions. Story first, then character quests, then clean-up — the platinum pops last, after <strong>A Long Road</strong> (100% completion). About 200 hours in all, most of it on the 100% checklist.</p>
+    <div id="roadmap-stages"></div>
+  </section>
+
+  <section id="view-missables" class="view">
+    <h2>Missable trophies</h2>
+    <p class="view-intro">Only one trophy is possibly missable. Everything else can be earned after the story in free roam — there is no mission replay, but no trophy depends on how you play a mission, and cheats disable trophies, so keep them off your trophy run.</p>
+    <div id="missable-list"></div>
+    <h3>Safe after the story</h3>
+    <p class="view-intro">All 54 other trophies stay available once the credits roll: every character quest, stranger strand, activity, robbery, collectible and challenge can be finished in free roam.</p>
+  </section>
+
+  <section id="view-planner" class="view">
+    <h2>Next up</h2>
+    <p class="view-intro">What to chase next, from your own progress: unfinished story first, then the trophies closest to done, then the next roadmap stage.</p>
+    <div id="planner-list"></div>
+    <h3>Stage progress</h3>
+    <div id="planner-stages"></div>
+  </section>
+
+  <section id="view-about" class="view">
+    <h2>About &amp; sources</h2>
+    <p class="view-intro">Leonida Platinum is a free, open-source, offline guide. It runs entirely from its own files: no network requests, no account, no ads. Your checklist, counters and notes live only in this browser (localStorage) until you export them.</p>
+    <h3>Where each fact comes from</h3>
+    <ul class="source-list">
+      <li><strong>Exophase</strong> — every trophy's official name, description and grade, as PlayStation publishes them. <a href="https://www.exophase.com/game/grand-theft-auto-vi-psn/trophies/" target="_blank" rel="noopener">exophase.com — GTA VI trophies</a></li>
+      <li><strong>PSNProfiles</strong> — the progress counts PlayStation tracks for trophies that have one (such as 42 Shooting Range challenges). <a href="https://psnprofiles.com/trophies/43531-grand-theft-auto-vi" target="_blank" rel="noopener">psnprofiles.com — GTA VI trophies</a></li>
+      <li><strong>GTABase</strong> — the how-to facts behind the guides: where things are, what unlocks them, what is still unconfirmed. <a href="https://www.gtabase.com/articles/gta-6/gta-6-achievements-trophies-list-ps5-xbox-series" target="_blank" rel="noopener">gtabase.com — GTA 6 trophy guide</a></li>
+    </ul>
+    <p class="view-intro">Every guide on this site is written in our own words for this guide. We cite our sources beside each trophy and claim nothing we have not checked: where a step is not yet confirmed in the game, the guide says so plainly. The official trophy names and descriptions are shown exactly as PlayStation publishes them. No Rockstar logo or official artwork is used anywhere.</p>
+    <h3>The official list, at a glance</h3>
+    <p class="view-intro" id="list-summary">55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze. 28 are hidden on PlayStation until earned. All single-player; no online trophies.</p>
+    <h3>Keyboard shortcuts</h3>
+    <ul class="source-list">
+      <li><kbd>/</kbd> focus search · <kbd>1</kbd>–<kbd>5</kbd> switch section · <kbd>Esc</kbd> close the guide pane</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>Leonida Platinum — an unofficial fan guide. Grand Theft Auto and GTA are trademarks of Take-Two Interactive; this guide is not affiliated with Rockstar Games. Trophy names and descriptions © Sony Interactive Entertainment, shown as published. Works offline.</p>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
